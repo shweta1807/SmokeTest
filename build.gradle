@@ -1,0 +1,62 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.fluentlenium:fluentlenium-core:0.13.0'
+    testCompile 'org.fluentlenium:fluentlenium-festassert:0.11.0'
+    testCompile 'org.json:json:20160212'
+    testCompile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.9.0'
+}
+
+
+def env = System.properties['website']
+def selenium_server = System.properties['seleniumServer']
+def browser = System.properties['browser']
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+}
+
+task smokeTest(type: Test) {
+
+    doFirst {
+        // systemProperty 'banner', project.banner
+
+        def buildDirectory = (getBuildDir())
+
+        systemProperty 'buildDirectory', buildDirectory
+        systemProperty 'env', env
+
+        if (selenium_server) {
+            systemProperty 'remote', true
+            systemProperty 'selenium_server', selenium_server
+            systemProperty 'browser', browser
+            println("Running smoke tests on the following remote server: " + selenium_server)
+            println(" using this environment: " + env)
+        } else {
+            println("Running smoke tests locally on the following environment: " + env)
+        }
+    }
+    sourceSets {
+        test {
+            java {
+                srcDirs = ["."]
+            }
+//            useJUnit {
+//                includeCategories 'utils.bopus'
+//
+//            }
+        }
+    }
+
+
+    testLogging {
+        events "started", "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+}
+

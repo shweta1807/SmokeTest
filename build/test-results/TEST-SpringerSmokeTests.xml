@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="SpringerSmokeTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-04-19T00:51:31" hostname="INsjain.local" time="29.504">
+  <properties/>
+  <testcase name="searchFromHomePageByDiscipline" classname="SpringerSmokeTests" time="11.825"/>
+  <testcase name="noSearchResultForsearchFromHomePageSearchTextBox" classname="SpringerSmokeTests" time="5.725"/>
+  <testcase name="searchFromHomePageSearchTextBox" classname="SpringerSmokeTests" time="8.52"/>
+  <system-out><![CDATA[Loading home page
+starting test
+Searching for COMPUTER
+Refining search results
+Sorting search results
+Loading home page
+starting test
+Searching for zzzzz565
+validating search result message
+Loading home page
+starting test
+Searching for COMPUTER
+Refining search results
+Sorting search results
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
