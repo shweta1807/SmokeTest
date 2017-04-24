@@ -12,7 +12,7 @@ public class Resultpage extends NavigationHelper {
 
 
     @FindBy(xpath = ".//*[@id='content-type-facet']/ol/li[5]/a/span[2]")
-    private FluentWebElement searchByBook;
+    private FluentWebElement searchByContent;
 
     @FindBy(css = "#sort-results")
     private FluentWebElement sortBy;
@@ -20,17 +20,20 @@ public class Resultpage extends NavigationHelper {
     @FindBy(css = "#no-results-message")
     private FluentWebElement noResultMessage;
 
+    @FindBy(css= ".facet-constraint-message")
+    private FluentWebElement resultConstraintMessage;
+
+
     public void refineSearcResultBy() {
-        System.out.println("Refining search results");
-        searchByBook.click();
+        System.out.println("Refining search results by Content");
+        searchByContent.click();
     }
 
-
     public void sortSearchBy() {
-        System.out.println("Sorting search results");
+        System.out.println("Sorting search results by oldest first");
         await().atMost(15, TimeUnit.SECONDS).until(sortBy).isDisplayed();
         Select state = new Select(sortBy.getElement());
-        state.selectByVisibleText("Newest First");
+        state.selectByVisibleText("Oldest First");
     }
 
     public void validatMessage() {
@@ -38,4 +41,12 @@ public class Resultpage extends NavigationHelper {
         isAtSearchResultsPage();
         assert (noResultMessage.getText()).contains("Sorry");
     }
+
+    public void validateResult() {
+        System.out.println("validating search result ");
+        isAtSearchResultsPage();
+        assert (resultConstraintMessage.getText()).contains("Book") ;
+    }
+
+
 }

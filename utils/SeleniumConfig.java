@@ -21,15 +21,14 @@ public class SeleniumConfig extends FluentTest {
             if (browserType == null) {
                 return new RemoteWebDriver(server_URL, DesiredCapabilities.firefox());
             }
-            switch (browserType) {
-                case "firefox":
-                    return new RemoteWebDriver(server_URL, DesiredCapabilities.firefox());
-                case "chrome":
-                    return new RemoteWebDriver(server_URL, DesiredCapabilities.chrome());
-                case "ie":
-                    return new RemoteWebDriver(server_URL, DesiredCapabilities.internetExplorer());
-                default:
-                    return new RemoteWebDriver(server_URL, DesiredCapabilities.firefox());
+            if (browserType.equals("firefox")) {
+                return new RemoteWebDriver(server_URL, DesiredCapabilities.firefox());
+            } else if (browserType.equals("chrome")) {
+                return new RemoteWebDriver(server_URL, DesiredCapabilities.chrome());
+            } else if (browserType.equals("ie")) {
+                return new RemoteWebDriver(server_URL, DesiredCapabilities.internetExplorer());
+            } else {
+                return new RemoteWebDriver(server_URL, DesiredCapabilities.firefox());
             }
 
         } catch (Exception e) {

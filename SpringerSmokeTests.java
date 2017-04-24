@@ -17,28 +17,34 @@ public class SpringerSmokeTests extends PageInstances {
         homePage.goToSearch(Data.REGULAR_SEARCH);
         resultPage.refineSearcResultBy();
         resultPage.sortSearchBy();
+        resultPage.validateResult();
+
     }
 
-    @Test
+   @Test
     public void noSearchResultForsearchFromHomePageSearchTextBox() {
         System.out.println("starting test");
         homePage.goToSearch(Data.INVALID_SEARCH);
         resultPage.validatMessage();
     }
 
-    @Test
+   @Test
     public void searchFromHomePageByDiscipline() {
         System.out.println("starting test");
-        ////div[@id='Discipline']/ol/li[2]/a
-        homePage.goToSearch(Data.REGULAR_SEARCH);
-        resultPage.refineSearcResultBy();
-        resultPage.sortSearchBy();
+        homePage.goToDiscipline();
+       resultPage.refineSearcResultBy();
+       resultPage.sortSearchBy();
+
     }
 
-
-//    Readme files :-
-//    Command to run .
-//            Envirnment configurations
+    @Test
+    public void advanceSearchFromHomePage() {
+        System.out.println("starting test");
+        homePage.getadvanceSearchPage();
+        advanceSearchPage.advanceSearch();
+        advanceSearchPage.fillAdvanceSearch();
+        resultPage.isAtSearchResultsPage();
+    }
 
 
 }

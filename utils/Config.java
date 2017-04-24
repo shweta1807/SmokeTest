@@ -17,33 +17,8 @@ public class Config {
         return server_URL;
     }
 
-    public static String getBanner() {
-        return System.getProperty("banner");
-    }
-
-    public static String getProductIdBasedOnBanner() {
-        String productId = "";
-        String banner = getBanner();
-        if (banner.equals("saks")) {
-            productId = "0424101393876";
-        } else if (banner.equals("lt")) {
-            productId = "0500041181629";
-        }
-        return productId;
-    }
-
-    public static String getGwpProductId() {
-        String productId = "0500002036515";
-        return productId;
-    }
-
-    public static boolean isLordAndTaylor() {
-        return getBanner().toLowerCase().equals("lt");
-    }
-
     public static String getWebsite() {
         String url = System.getProperty("env");
-
 
         if (url == null) {
             try {
@@ -62,10 +37,6 @@ public class Config {
         return screenShotDirectory;
     }
 
-    public static String getArtifactsDirectory() {
-        String jsonDirectory = System.getProperty("buildDirectory") + "/artifacts";
-        return jsonDirectory;
-    }
 
     public static boolean isRemoteSelenium() {
         return (System.getProperty("remote") == null);

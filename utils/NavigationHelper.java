@@ -16,6 +16,10 @@ public class NavigationHelper extends FluentPage {
         await().atMost(30, TimeUnit.SECONDS).until(".number-of-search-results-and-search-terms").isDisplayed();
     }
 
+    public void isAtAdvanceSearchPage() {
+        await().atMost(30, TimeUnit.SECONDS).until("[id='advanced-search']").isDisplayed();
+    }
+
 }
 
 

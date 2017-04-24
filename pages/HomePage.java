@@ -1,5 +1,6 @@
 package pages;
 
+import org.fluentlenium.core.annotation.Page;
 import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,9 +9,8 @@ import utils.NavigationHelper;
 @PageUrl("/")
 public class HomePage extends NavigationHelper {
 
-    private final long MODAL_MAX_WAIT = 8000;
-    private final String GENERIC_MODAL_SELECTOR = "#generic-modal";
-    private final String GENERIC_MODAL_IFRAME_SELECTOR = "#generic-modal iframe";
+    @Page
+    private AdvanceSearchPage advanceSearchPage;
 
     @FindBy(css = "[data-qa-id='logo']")
     private FluentWebElement bannerLogo;
@@ -24,18 +24,22 @@ public class HomePage extends NavigationHelper {
     @FindBy(css = "#close-button")
     private FluentWebElement closeModalButton;
 
+    @FindBy(xpath= ".//a[contains(text(),'Astronomy')]")
+    private FluentWebElement Discipline;
+
+
     public void openHomePage() {
         goTo("/");
         isAtHomePage();
     }
 
-    public void goToSearch(String productCode) {
-        search(productCode);
+    public void goToSearch(String searchCode) {
+        search(searchCode);
         isAtSearchResultsPage();
     }
 
     public void goToDiscipline() {
-        searchDiscipline();
+        searchByDiscipline();
         isAtSearchResultsPage();
     }
 
@@ -45,10 +49,14 @@ public class HomePage extends NavigationHelper {
         System.out.println("Searching for " + keyWord);
     }
 
-    protected void searchDiscipline() {
-       // fill(searchField).with(keyWord);
-        searchButton.click();
-        System.out.println("Searching for " );
+    protected void searchByDiscipline() {
+        Discipline.click();
+        System.out.println("Searching by Discipline Astronomy " );
+    }
+
+    public AdvanceSearchPage getadvanceSearchPage() {
+        return advanceSearchPage;
     }
 }
+
 
